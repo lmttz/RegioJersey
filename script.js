@@ -173,7 +173,7 @@ function renderCatalogo(filtro="") {
       });
 
       // Tooltip + modal de tallas
-      // Imagen clic para ampliar + tallas
+// Imagen clic para ampliar + tallas
 inner.querySelector("img").addEventListener("click", () => {
   const modalImg = document.createElement("div");
   modalImg.className = "modal";
@@ -198,6 +198,7 @@ inner.querySelector("img").addEventListener("click", () => {
         `).join("")}
       </tbody>
     </table>
+    <img src="Images/guia_tallas.png" alt="Guía de Tallas" class="guia-tallas" style="margin-top:0.5rem; width:100%; max-width:300px; display:block; border-radius:6px; box-shadow:0 2px 6px rgba(0,0,0,0.1);">
   `;
 
   modalImg.innerHTML = `

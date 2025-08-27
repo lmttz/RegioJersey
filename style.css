@@ -451,3 +451,43 @@ main {
     font-size: 0.75rem;
   }
 }
+
+/* Imagen guía de tallas debajo de la tabla solo en móvil/tablet */
+@media (max-width: 768px) {
+  .modal-tallas .guia-tallas {
+    display: block;
+    margin: 0.5rem auto 0 auto;
+    max-width: 90%;
+    height: auto;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+}
+
+/* Imagen guía de tallas dentro del modal, debajo de la tabla */
+.modal-tallas .guia-tallas {
+  display: block;
+  margin: 0.5rem auto 0 auto; /* centrada */
+  max-width: 100%;            /* no se pase del contenedor */
+  height: auto;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  transition: transform 0.2s ease;
+}
+
+.modal-tallas .guia-tallas:hover {
+  transform: scale(1.02);
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+  .modal-tallas .guia-tallas {
+    max-width: 90%;   /* un poco más pequeña en móviles */
+  }
+}
+
+@media (min-width: 769px) {
+  .modal-tallas .guia-tallas {
+    max-width: 300px; /* desktop: no tan grande */
+  }
+}
