@@ -154,7 +154,6 @@ function renderCatalogo(filtro="") {
       const tallasLista = inner.querySelector(".tallasLista");
 
       btnTallas.addEventListener("click", () => {
-        // agregar botón "X" si no existe
         if(!tallasLista.querySelector(".close-tallas")){
           const closeBtn = document.createElement("button");
           closeBtn.textContent = "✖";
@@ -172,53 +171,71 @@ function renderCatalogo(filtro="") {
         btnTallas.textContent = tallasLista.classList.contains("hidden") ? "Ver Tallas" : "Ocultar Tallas";
       });
 
-      // Tooltip + modal de tallas
-// Imagen clic para ampliar + tallas
-inner.querySelector("img").addEventListener("click", () => {
-  const modalImg = document.createElement("div");
-  modalImg.className = "modal";
-  
-  // Generar tabla de tallas dentro del modal
-  const tallasTabla = `
-    <table>
-      <thead>
-        <tr>
-          <th>Talla</th>
-          <th>Ancho (cm)</th>
-          <th>Largo (cm)</th>
-        </tr>
-      </thead>
-      <tbody>
-        ${j.tallas.map(t => `
-          <tr>
-            <td>${t.nombre}</td>
-            <td>${t.ancho}</td>
-            <td>${t.largo}</td>
-          </tr>
-        `).join("")}
-      </tbody>
-    </table>
-    <img src="Images/guia_tallas.png" alt="Guía de Tallas" class="guia-tallas" style="margin-top:0.5rem; width:100%; max-width:300px; display:block; border-radius:6px; box-shadow:0 2px 6px rgba(0,0,0,0.1);">
-  `;
+      // Modal de jersey + tallas + guía
+      inner.querySelector("img").addEventListener("click", () => {
+        const modal = document.createElement("div");
+        modal.className = "modal";
 
-  modalImg.innerHTML = `
-    <div class="modal-content modal-responsive">
-      <button class="close-modal">✖</button>
-      <div class="modal-body">
-        <img src="${j.foto}" alt="${j.nombre}">
-        <div class="modal-tallas">
-          ${tallasTabla}
-        </div>
-      </div>
-    </div>
-  `;
+        const tallasTabla = `
+          <table>
+            <thead>
+              <tr>
+                <th>Talla</th>
+                <th>Ancho (cm)</th>
+                <th>Largo (cm)</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${j.tallas.map(t => `
+                <tr>
+                  <td>${t.nombre}</td>
+                  <td>${t.ancho}</td>
+                  <td>${t.largo}</td>
+                </tr>`).join("")}
+            </tbody>
+          </table>
+        `;
 
-  document.body.appendChild(modalImg);
+        modal.innerHTML = `
+          <div class="modal-content modal-responsive">
+            <button class="close-modal">✖</button>
+            <div class="modal-body">
+              <img src="${j.foto}" alt="${j.nombre}">
+              <div class="modal-tallas">
+                ${tallasTabla}
+                <img src="Images/guia_tallas.png" class="guia-tallas" alt="Guía de tallas">
+              </div>
+            </div>
+          </div>
+        `;
 
-  // cerrar modal
-  modalImg.addEventListener("click", (e) => { if(e.target === modalImg) modalImg.remove(); });
-  modalImg.querySelector(".close-modal").addEventListener("click", () => modalImg.remove());
-});
+        document.body.appendChild(modal);
+
+        // Cerrar modal al clic en fondo
+        modal.addEventListener("click", (e) => { if(e.target === modal) modal.remove(); });
+        modal.querySelector(".close-modal").addEventListener("click", () => modal.remove());
+
+        // Click en imagen de guía de tallas para abrir en grande
+        const guiaImg = modal.querySelector(".guia-tallas");
+        if(guiaImg){
+          guiaImg.addEventListener("click", () => {
+            const modalGuia = document.createElement("div");
+            modalGuia.className = "modal";
+
+            modalGuia.innerHTML = `
+              <div class="modal-content">
+                <button class="close-modal">✖</button>
+                <img src="${guiaImg.src}" alt="Guía de tallas">
+              </div>
+            `;
+
+            document.body.appendChild(modalGuia);
+
+            modalGuia.addEventListener("click", (e) => { if(e.target === modalGuia) modalGuia.remove(); });
+            modalGuia.querySelector(".close-modal").addEventListener("click", () => modalGuia.remove());
+          });
+        }
+      });
     });
 }
 
