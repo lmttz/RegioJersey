@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Regio Jersey</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="favicon.png">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1 id='logo'>Regio Jersey</h1>
+      <input type="text" placeholder="Buscar por equipo..." class="search" id="searchInput">
+    </header>
+
+    <nav class="main-nav">
+      <ul>
+        <li class="submenu">
+          <button class="tab" data-menu="catalogo">Catalogo ▼</button>
+          <ul class="submenu-content hidden">
+            <li><button class="tab" data-category="todos">Todos</button></li>
+            <li><button class="tab" data-category="europeos">Europeos</button></li>
+            <li><button class="tab" data-category="locales">Locales</button></li>
+            <li><button class="tab" data-category="internacionales">Internacionales</button></li>
+            <li><button class="tab" data-category="retro_locales">Retro Locales</button></li>
+            <li><button class="tab" data-category="retro_internacionales">Retro Internacionales</button></li>
+          </ul>
+        </li>
+        <li><button class="tab" data-menu="sucursales">Sucursales</button></li>
+        <li><button class="tab" data-menu="contacto">Contacto</button></li>
+      </ul>
+    </nav>
+
+    <main id="catalogo"></main>
+
+    <section id="sucursales" class="hidden">
+      <h2>Nuestras sucursales</h2>
+      <p>📍 Monterrey<br>📍 San Nicolás<br>📍 Guadalupe</p>
+    </section>
+
+    <section id="contacto" class="hidden">
+      <h2>Contacto</h2>
+      <p>Tel: 811-234-5678<br>Email: contacto@regiojersey.com</p>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
